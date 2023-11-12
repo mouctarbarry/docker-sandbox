@@ -1,15 +1,9 @@
 name: "Hello Actions"
 on:
   workflow_dispatch:
-    inputs:
-      MY_NAME:
-        description: "Who to greet"
-        required: true
-        default: "World"
   push:
     branches:
       - main
-
 jobs:
   hello-actions-job:
     runs-on: ubuntu-latest
@@ -20,6 +14,4 @@ jobs:
       MY_NAME: ${{ github.event.inputs.MY_NAME }}
     steps:
       - name: Run Hello Actions
-        run:  docker run \
-                -e MY_NAME="${{ env.NAME }}" \
-                mouctarbarry/hello-action:latest
+        run: echo "Hello, $MY_NAME, from the Dockerized action!"
