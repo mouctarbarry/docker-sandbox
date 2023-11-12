@@ -1,7 +1,4 @@
 name: "Hello Actions"
-description: "Greet someone"
-author: "mouctarbarry@github.com"
-
 on:
   workflow_dispatch:
     inputs:
@@ -9,11 +6,18 @@ on:
         description: "Who to greet"
         required: true
         default: "World"
+  push:
+    branches:
+      - main
 
-runs:
-  uses: "docker"
-  image: "docker://mouctarbarry/hello-action:latest"
-
-branding:
-  icon: "mic"
-  color: "purple"
+jobs:
+  hello-actions-job:
+    runs-on: ubuntu-latest
+    container:
+      image: docker://mouctarbarry/hello-action:latest
+      options: --cpus 1
+    env:
+      MY_NAME: ${{ github.event.inputs.MY_NAME }}
+    steps:
+      - name: Run Hello Actions
+        run: echo "Hello, $MY_NAME, from the Dockerized action!"
