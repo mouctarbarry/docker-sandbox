@@ -1,1 +1,17 @@
-name: Saying hello
+name: "Hello Actions"
+description: "Greet someone"
+author: "mouctarbarry@github.com"
+
+inputs:
+  MY_NAME:
+    description: "Who to greet"
+    required: true
+    default: "World"
+
+runs:
+  uses: "docker"
+  image: "docker://mouctarbarry/hello-action:latest"
+
+branding:
+  icon: "mic"
+  color: "purple"
