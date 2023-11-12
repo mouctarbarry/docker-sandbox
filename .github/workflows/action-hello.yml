@@ -20,4 +20,6 @@ jobs:
       MY_NAME: ${{ github.event.inputs.MY_NAME }}
     steps:
       - name: Run Hello Actions
-        run: echo "Hello, $MY_NAME, from the Dockerized action!"
+        run:  docker run \
+                -e MY_NAME="${{ env.NAME }}" \
+                mouctarbarry/hello-action:latest
